@@ -24,7 +24,7 @@ jobs:
           python -m playwright install --with-deps
 
       - name: Test Shiny App
-        run: pytest --tracing=retain-on-failure
+        run: pytest
       - uses: actions/upload-artifact@v4
         if: ${{ !cancelled() }}
         with:
