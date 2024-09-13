@@ -20,4 +20,3 @@ black
 qrcode
 pytest
 playwright
-string

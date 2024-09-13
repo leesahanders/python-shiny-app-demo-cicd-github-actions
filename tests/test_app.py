@@ -2,10 +2,7 @@ from playwright.sync_api import Page
 from shiny.playwright import controller
 from shiny.pytest import create_app_fixture
 from shiny.run import ShinyAppProc
-from string import punctuation
 import pytest
-
-#set(punctuation)
 
 #app = create_app_fixture("..\app.py") # for Linux/Mac
 #app = create_app_fixture("../app.py") # For Windows
