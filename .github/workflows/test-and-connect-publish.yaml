@@ -16,10 +16,12 @@ jobs:
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
-          pip install -r requirements.txt
+          python -m pip install -r requirements.txt
 
-      - name: Ensure browsers are installed
-        run: python -m playwright install --with-deps
+      - name: Ensure playwright and browsers are installed
+        run: |
+          python -m pip install playwright
+          python -m playwright install --with-deps
 
       - name: Test Shiny App
         run: pytest --tracing=retain-on-failure
