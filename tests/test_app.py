@@ -15,3 +15,4 @@ def test_app(page: Page, app: ShinyAppProc):
     slider = controller.InputSlider(page, "n")
     slider.set("55")
     txt.expect_value("n*2 is 110")
+

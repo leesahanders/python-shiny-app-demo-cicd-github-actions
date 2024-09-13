@@ -94,7 +94,7 @@ pytest
 
 For example the test might be: 
 
-```python
+```{.python filename="test_app.py"}
 from playwright.sync_api import Page
 
 from shiny.playwright import controller
@@ -114,6 +114,56 @@ def test_app(page: Page, app: ShinyAppProc):
     slider.set("55")
     txt.expect_value("n*2 is 110")
 ```
+
+For the app: 
+
+```{.python filename="app.py"}
+from shiny import render, ui
+from shiny.express import input
+
+ui.panel_title("Hello Shiny!")
+ui.input_slider("n", "N", 0, 100, 20)
+
+@render.text
+def txt():
+    return f"n*2 is {input.n() * 2}"
+```
+
+
+Or another example: 
+
+```{.python filename="test_app.py"}
+from app import filter_penguins
+
+def test_filter_penguins():
+    assert filter_penguins(["Adelie"]).shape[0] == 152
+    assert filter_penguins(["Gentoo"]).shape[0] == 124
+    assert filter_penguins(["Chinstrap"]).shape[0] == 68
+    assert filter_penguins(["Adelie", "Gentoo"]).shape[0] == 276
+    assert filter_penguins(["Adelie", "Gentoo", "Chinstrap"]).shape[0] == 344
+```
+
+For the app: 
+
+```{.python filename="app.py"}
+from palmerpenguins import load_penguins
+from shiny.express import input, render, ui
+
+penguins = load_penguins()
+
+ui.input_select(
+  "species", "Enter a species",
+  list(penguins.species.unique())
+)
+
+@render.data_frame
+def display_dat():
+    return filter_penguins(input.species())
+
+def filter_penguins(species):
+    return penguins[penguins.species.isin(species)]
+```
+
 
 ## Updates
 
