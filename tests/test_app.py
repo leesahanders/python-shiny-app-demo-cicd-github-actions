@@ -1,14 +1,12 @@
 from playwright.sync_api import Page
-
 from shiny.playwright import controller
 from shiny.pytest import create_app_fixture
 from shiny.run import ShinyAppProc
-
 import pytest
 
 #app = create_app_fixture("..\app.py") # for Linux/Mac
 #app = create_app_fixture("../app.py") # For Windows
-app = create_app_fixture("app.py") # For Windows # For CI
+app = create_app_fixture("..\app.py") # For Windows # For CI
 
 def test_app(page: Page, app: ShinyAppProc):
     page.goto(app.url)

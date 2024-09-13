@@ -20,7 +20,7 @@ jobs:
 
       - name: Ensure playwright and browsers are installed
         run: |
-          python -m pip install playwright pytest
+          python -m pip install playwright pytest pytest-playwright shiny
           python -m playwright install --with-deps
 
       - name: Test Shiny App
