@@ -67,6 +67,54 @@ rsconnect write-manifest shiny --overwrite .
 
 Commit the new `manifest.json` file to the git repo along with the code.
 
+## Testing 
+
+Refer to the documentation: <https://shiny.posit.co/py/docs/end-to-end-testing.html#add-tests-an-existing-app> and <https://playwright.dev/python/docs/test-runners> 
+
+Install the requirements: 
+
+```bash
+pip install pytest pytest-playwright
+playwright install
+```
+
+Add tests with: 
+
+```bash
+shiny add test
+```
+
+pytest conventions for naming the test file are that it should start with `test_`. 
+
+For app.py and test_basic_app.py files in the same directory run: 
+
+```bash
+pytest
+```
+
+For example the test might be: 
+
+```python
+from playwright.sync_api import Page
+
+from shiny.playwright import controller
+from shiny.pytest import create_app_fixture
+from shiny.run import ShinyAppProc
+
+import pytest
+
+#app = create_app_fixture("..\app.py") # for Linux/Mac
+app = create_app_fixture("../app.py") # For Windows
+
+def test_app(page: Page, app: ShinyAppProc):
+    page.goto(app.url)
+    # Add test code here
+    txt = controller.OutputText(page, "txt")
+    slider = controller.InputSlider(page, "n")
+    slider.set("55")
+    txt.expect_value("n*2 is 110")
+```
+
 ## Updates
 
 Create the requirements file:
