@@ -33,7 +33,7 @@ jobs:
 
       - name: Create manifest.json
         run: |
-          rsconnect write-manifest shiny .
+          rsconnect write-manifest shiny . --overwrite
 
       - name: Publish Connect content
         uses: rstudio/actions/connect-publish@main
