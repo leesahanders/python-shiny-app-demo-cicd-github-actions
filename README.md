@@ -106,7 +106,7 @@ Run the application (after setting up the venv):
 python app.py
 ```
 
-## Deploy
+## Deploy manually
 
 ### rsconnect-python CLI
 

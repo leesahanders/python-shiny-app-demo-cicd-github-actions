@@ -39,11 +39,13 @@ jobs:
         if: ${{ !cancelled() }}
         with:
           name: playwright-traces
-          path: tests/
+          path: test-results/
+          #     path: tests/ use the correct path to run the tests
 
       - name: Create manifest.json
         run: |
           rsconnect write-manifest shiny . --overwrite
+          echo "test=hello" >> "$GITHUB_OUTPUT"
 
       - name: Publish Connect content
         uses: rstudio/actions/connect-publish@main
@@ -55,12 +57,10 @@ jobs:
           force: true
           dir: |
             .:/python-shiny-app-demo-cicd-github-actions
-          run: |
-            echo "test=hello" >> "$GITHUB_OUTPUT"
 
       - name: Check outputs
         run: |
-          rsconnect info app.py
+          rsconnect info .
           echo "::error file=app.js,line=1::Missing semicolon"
           echo ${{ steps.step1.outputs.test }}
           echo $output1
