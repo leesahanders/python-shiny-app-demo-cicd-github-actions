@@ -61,6 +61,8 @@ jobs:
       - name: Check outputs
         run: |
           echo ${{ steps.step1.outputs.test }}
+          echo $output1
+          echo $dir
           echo "$output1"
           echo "$dir"
           echo "$url"
