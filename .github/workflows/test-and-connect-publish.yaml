@@ -63,14 +63,9 @@ jobs:
 
       - name: Update meta data 
         run: |
-          export CONTENT_ID=${{ steps.publish.outputs.results }}$id
+          export CONTENT_ID='${{ steps.publish.outputs.results }}' | jq '.[0].id'
           export DATA='{"title": "Python CICD with pytest/Playwright using Github actions"}'
-          export CONTENT_NAME='python-shiny-app-demo-cicd-github-actions'
-          export contentguid=$(curl -H "Authorization: KEY ${{ secrets.CONNECT_API_KEY }}" ${{ secrets.CONNECT_SERVER }}/__api__/v1/content?name=${CONTENT_NAME} | jq -r '.[].guid')
-          echo $contentguid
-          echo $CONTENT_ID
-          echo $CONTENT_NAME
-          curl --silent --show-error -L --max-redirs 0 --fail -X PATCH -H "Authorization: Key ${{ secrets.CONNECT_API_KEY }}" --data "${DATA}" "${{ secrets.CONNECT_SERVER }}__api__/v1/content/${contentguid}"
+          curl --silent --show-error -L --max-redirs 0 --fail -X PATCH -H "Authorization: Key ${{ secrets.CONNECT_API_KEY }}" --data "${DATA}" "${{ secrets.CONNECT_SERVER }}__api__/v1/content/${CONTENT_ID}"
 
         # - name: Use Connect API to set content title
         #   run: |
