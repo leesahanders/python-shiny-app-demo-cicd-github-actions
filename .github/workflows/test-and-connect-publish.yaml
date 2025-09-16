@@ -9,7 +9,7 @@ jobs:
   test-and-connect-publish:
     runs-on: ubuntu-22.04
     outputs:
-      output1: ${{ steps.step1.outputs.test }}
+      output1: ${{ steps.test.outputs.test }}
       dir: ${{ steps.publish.outputs.dir }}
       url: ${{ steps.publish.outputs.url }}
       id: ${{ steps.publish.outputs.id }}
@@ -44,6 +44,7 @@ jobs:
           #     path: tests/ use the correct path to run the tests
 
       - name: Create manifest.json
+        id: test
         run: |
           rsconnect write-manifest shiny . --overwrite
           echo "test=hello" >> "$GITHUB_OUTPUT"
@@ -63,7 +64,7 @@ jobs:
         run: |
           python -m rsconnect info .
           echo "::error file=app.js,line=1::This is a test, ignore"
-          echo ${{ steps.step1.outputs.test }}
+          echo ${{ steps.test.outputs.test }}
           echo $output1
           echo $dir
           echo "$output1"

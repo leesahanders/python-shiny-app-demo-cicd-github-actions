@@ -1,0 +1,12 @@
+{
+    "https://pub.current.posit.team": {
+        "server_url": "https://pub.current.posit.team",
+        "filename": "/home/lisa.anders/git/python-shiny-app-demo-cicd-github-actions",
+        "app_url": "https://pub.current.posit.team/content/e76b69c3-a100-458e-b5a3-658b8ec88118/",
+        "app_id": "1607",
+        "app_guid": "e76b69c3-a100-458e-b5a3-658b8ec88118",
+        "title": "python-shiny-app-demo-cicd-github-actions",
+        "app_mode": "python-shiny",
+        "app_store_version": 1
+    }
+}
