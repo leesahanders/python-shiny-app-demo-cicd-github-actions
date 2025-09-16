@@ -15,6 +15,33 @@ If you want to learn more about it you can read: [https://solutions.rstudio.com/
 
 ## Usage
 
+### uv 
+
+In that example I created my uv venv with the below, after making sure that I was "cd'd" to the correct directory:
+
+```bash
+# Check what python versions you have access to
+ls -1d /opt/python/*
+
+# Create the uv project, this example declares the python version to use explicitly. Make sure this matches a version you have access to.
+uv init --app --python 3.10.16
+
+uv pip install shiny
+```
+
+If using a specific version of a package make sure it is called out both in the python-versions file and the pyproject.toml file
+If using a specific version of databricks-connect then make sure that the version needed is called out in the pyproject.toml file like this:
+
+```
+dependencies = [
+    "databricks-connect==14.3.3",
+]
+```
+
+After changing anything be sure to run `uv sync`. 
+
+### venv
+
 Setup the `venv` environment:
 
 ```bash
