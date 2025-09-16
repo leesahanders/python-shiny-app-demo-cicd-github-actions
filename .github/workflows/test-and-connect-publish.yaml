@@ -9,6 +9,7 @@ jobs:
   test-and-connect-publish:
     runs-on: ubuntu-22.04
     outputs:
+      output1: ${{ steps.step1.outputs.test }}
       dir: ${{ steps.publish.outputs.dir }}
       url: ${{ steps.publish.outputs.url }}
       id: ${{ steps.publish.outputs.id }}
@@ -54,9 +55,12 @@ jobs:
           force: true
           dir: |
             .:/python-shiny-app-demo-cicd-github-actions
+          run: |
+            echo "test=hello" >> "$GITHUB_OUTPUT"
 
       - name: Check outputs
         run: |
+          echo { steps.publish.outputs.test }}
           echo "$dir"
           echo "$url"
           echo "$id"
