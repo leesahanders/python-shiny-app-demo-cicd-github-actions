@@ -229,6 +229,14 @@ def filter_penguins(species):
     return penguins[penguins.species.isin(species)]
 ```
 
+## Updates to CI/CD github action 
+
+If you wanted to add an error:
+ 
+```
+echo "::error file=app.js,line=1::This is a test, ignore"
+```
+
 
 ## Updates
 

@@ -60,19 +60,7 @@ jobs:
           dir: |
             .:/python-shiny-app-demo-cicd-github-actions
       - run: printf '${{ steps.publish.outputs.results }}\n' | jq .
-
-      - name: Check outputs
-        run: |
-          python -m rsconnect info .
-          echo "::error file=app.js,line=1::This is a test, ignore"
-          echo ${{ steps.test.outputs.test }}
-          echo $output1
-          echo $dir
-          echo "$output1"
-          echo "$dir"
-          echo "$url"
-          echo "$id"
-          echo "$success"
+      - run: printf '${{ steps.publish.outputs.results }}$id\n' | jq .
 
       - name: Update meta data 
         run: |
