@@ -43,4 +43,21 @@ jobs:
           access-type: logged_in
           force: true
           dir: |
-            .:/shiny-app-demo-cicd-github-actions
+            .:/python-shiny-app-demo-cicd-github-actions
+
+      - name: Update meta data 
+        run: |
+          export DATA='{"title": "Python CICD with pytest/Playwright using Github actions"}'
+          export CONTENT_NAME='python-shiny-app-demo-cicd-github-actions'
+          export contentguid=$(curl -H "Authorization: KEY ${{ secrets.CONNECT_API_KEY }}" ${{ secrets.CONNECT_SERVER }}/__api__/v1/content?name=${CONTENT_NAME} | jq -r '.[].guid')
+          echo contentguid
+          curl --silent --show-error -L --max-redirs 0 --fail -X PATCH -H "Authorization: Key ${{ secrets.CONNECT_API_KEY }}" --data "${DATA}" "${{ secrets.CONNECT_SERVER }}__api__/v1/content/${contentguid}"
+
+        # - name: Use Connect API to set content title
+        #   run: |
+        #     export DATA='{"title": "Building diagrams using in reports"}'
+        #     export CONTENT_NAME='report-mermaid-diagrams'
+        #     export contentguid=$(curl -H "Authorization: KEY ${{ secrets.CONNECT_API_KEY }}" ${{ secrets.CONNECT_SERVER }}/__api__/v1/content?name=${CONTENT_NAME} | jq -r '.[].guid')
+        #     echo contentguid
+        #     curl --silent --show-error -L --max-redirs 0 --fail -X PATCH -H "Authorization: Key ${{ secrets.CONNECT_API_KEY }}" --data "${DATA}" "${{ secrets.CONNECT_SERVER }}__api__/v1/content/${contentguid}"
+        #     export DATA2='{"tag_id": "Quarto Report with Mermaid Diagrams"}'
