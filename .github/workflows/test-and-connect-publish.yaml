@@ -59,6 +59,7 @@ jobs:
           force: true
           dir: |
             .:/python-shiny-app-demo-cicd-github-actions
+      - run: printf '${{ steps.publish.outputs.results }}\n' | jq .
 
       - name: Check outputs
         run: |
