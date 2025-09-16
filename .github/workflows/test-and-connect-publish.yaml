@@ -59,7 +59,7 @@ jobs:
           dir: |
             .:/python-shiny-app-demo-cicd-github-actions
       - run: printf '${{ steps.publish.outputs.results }}\n' | jq .
-      - run: printf '${{ steps.publish.outputs.results }}[0]['id']\n' | jq .
+      - run: printf '${{ steps.publish.outputs.results }}' | jq '.[0].id'
 
       - name: Update meta data 
         run: |
