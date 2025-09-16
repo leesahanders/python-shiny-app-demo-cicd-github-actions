@@ -10,12 +10,11 @@ jobs:
     runs-on: ubuntu-22.04
     outputs:
       output1: results
-      dir: ${{ steps.step7.outputs.dir }}
-      url: ${{ steps.step7.outputs.url }}
-      id: ${{ steps.step7.outputs.id }}
-      success: ${{ steps.step7.outputs.success }}
+      dir: ${{ steps.publish.outputs.dir }}
+      url: ${{ steps.publish.outputs.url }}
+      id: ${{ steps.publish.outputs.id }}
+      success: ${{ steps.publish.outputs.success }}
     steps:
-      - id: step1
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v4
         with:
@@ -44,6 +43,7 @@ jobs:
 
       - name: Publish Connect content
         uses: rstudio/actions/connect-publish@main
+        id: publish
         with:
           url: ${{ secrets.CONNECT_SERVER }}
           api-key: ${{ secrets.CONNECT_API_KEY }}
