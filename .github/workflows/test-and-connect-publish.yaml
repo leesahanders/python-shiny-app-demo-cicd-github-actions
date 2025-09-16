@@ -17,23 +17,19 @@ jobs:
     steps:
       - id: step1
       - uses: actions/checkout@v4
-      - id: step2
       - uses: actions/setup-python@v4
         with:
-          python-version: '3.11'      
-      - id: step3
+          python-version: '3.12'      
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
           python -m pip install -r requirements.txt
 
-      - id: step4
       - name: Ensure playwright and browsers are installed
         run: |
           python -m pip install playwright pytest pytest-playwright rsconnect
           python -m playwright install --with-deps
 
-      - id: step5
       - name: Test Shiny App
         run: pytest
       - uses: actions/upload-artifact@v4
@@ -42,12 +38,10 @@ jobs:
           name: playwright-traces
           path: test-results/
 
-      - id: step6
       - name: Create manifest.json
         run: |
           rsconnect write-manifest shiny . --overwrite
 
-      - id: step7
       - name: Publish Connect content
         uses: rstudio/actions/connect-publish@main
         with:
@@ -58,7 +52,6 @@ jobs:
           dir: |
             .:/python-shiny-app-demo-cicd-github-actions
 
-      - id: step8
       - name: Update meta data 
         run: |
           export DATA='{"title": "Python CICD with pytest/Playwright using Github actions"}'
