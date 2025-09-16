@@ -46,6 +46,8 @@ dependencies = [
 
 After changing anything be sure to run `uv sync`. 
 
+Create a requirements.txt file (for playwright) with: `uv export --format requirements-txt`. 
+
 ### venv
 
 Setup the `venv` environment:
