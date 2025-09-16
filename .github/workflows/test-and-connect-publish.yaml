@@ -64,8 +64,17 @@ jobs:
       - name: Update meta data 
         run: |
           export CONTENT_ID='${{ steps.publish.outputs.results }}' | jq '.[0].id'
-          export DATA='{"title": "Python CICD with pytest/Playwright using Github actions"}'
-          curl --silent --show-error -L --max-redirs 0 --fail -X PATCH -H "Authorization: Key ${{ secrets.CONNECT_API_KEY }}" --data "${DATA}" "${{ secrets.CONNECT_SERVER }}__api__/v1/content/${CONTENT_ID}"
+          export CONTENT_GUID=$(curl -H "Authorization: KEY ${{ secrets.CONNECT_API_KEY }}" ${{ secrets.CONNECT_SERVER }}/__api__/v1/content?name=${CONTENT_NAME} | jq -r '.[].guid')
+          echo $CONTENT_GUID
+          export DATA='{"title": "Python CICD with pytest and Playwright using Github actions"}'
+          curl --silent --show-error -L --max-redirs 0 --fail \
+            -X PATCH \
+            -H "Authorization: Key ${{ secrets.CONNECT_API_KEY }}" \
+            --data-raw "${DATA}" \
+            "${{ secrets.CONNECT_SERVER }}__api__/v1/content/${CONTENT_GUID}"
+
+
+        #  We could use any of the supported API data fields: https://docs.posit.co/connect/api/#patch-/v1/content/-guid-
 
         # - name: Use Connect API to set content title
         #   run: |

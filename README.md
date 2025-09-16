@@ -232,11 +232,12 @@ def filter_penguins(species):
 ## Updates to CI/CD github action 
 
 If you wanted to add an error:
- 
+
 ```
 echo "::error file=app.js,line=1::This is a test, ignore"
 ```
 
+For other parameters that can be changed with the runtime refer to the Connect API: <https://docs.posit.co/connect/api/#patch-/v1/content/-guid-> 
 
 ## Updates
 
