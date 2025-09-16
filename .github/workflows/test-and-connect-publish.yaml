@@ -65,7 +65,7 @@ jobs:
         run: |
           # Get the content GUID
           CONTENT_NAME='python-shiny-app-demo-cicd-github-actions'
-          CONTENT_GUID=$(curl -H "Authorization: KEY ${{ secrets.CONNECT_API_KEY }}" ${{ secrets.CONNECT_SERVER }}/__api__/v1/v1/content?name=${CONTENT_NAME} | jq -r '.[].guid')
+          CONTENT_GUID=$(curl -H "Authorization: KEY ${{ secrets.CONNECT_API_KEY }}" ${{ secrets.CONNECT_SERVER }}/__api__/v1/content?name=${CONTENT_NAME} | jq -r '.[].guid')
 
           echo "Content GUID: $CONTENT_GUID"
 
