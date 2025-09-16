@@ -500,19 +500,6 @@ wheels = [
 ]
 
 [[package]]
-name = "palmerpenguins"
-version = "0.1.4"
-source = { registry = "https://pypi.org/simple" }
-dependencies = [
-    { name = "numpy" },
-    { name = "pandas" },
-]
-sdist = { url = "https://files.pythonhosted.org/packages/67/6a/5f701d151baa94985cfebf56697f3c6f86546e96f75362b15f5b758251bd/palmerpenguins-0.1.4.tar.gz", hash = "sha256:d04d9064930e053fb0805261fe2aa26b4581fdabacaa54d393ddd65bb93bbaf2", size = 5626 }
-wheels = [
-    { url = "https://files.pythonhosted.org/packages/23/78/d81191d1faf9c41e8707eb0c08dc6d489157bfa42faad62e0ab90c37ebbc/palmerpenguins-0.1.4-py3-none-any.whl", hash = "sha256:63c904db3dcef10e4ff1372f9b7f50a8f44c7364cc03f27f9a487fe5762d159c", size = 17523 },
-]
-
-[[package]]
 name = "pandas"
 version = "2.3.2"
 source = { registry = "https://pypi.org/simple" }
@@ -662,7 +649,6 @@ source = { virtual = "." }
 dependencies = [
     { name = "altair" },
     { name = "anywidget" },
-    { name = "palmerpenguins" },
     { name = "pandas" },
     { name = "shiny" },
     { name = "shinywidgets" },
@@ -672,7 +658,6 @@ dependencies = [
 requires-dist = [
     { name = "altair", specifier = ">=5.4.1" },
     { name = "anywidget", specifier = ">=0.9.13" },
-    { name = "palmerpenguins" },
     { name = "pandas", specifier = ">=2.2.3" },
     { name = "shiny", specifier = ">=1.2.1" },
     { name = "shinywidgets", specifier = ">=0.3.4" },

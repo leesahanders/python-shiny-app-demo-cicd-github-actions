@@ -15,7 +15,6 @@ seaborn
 ipywidgets
 ipyleaflet
 siuba
-palmerpenguins
 black
 qrcode
 pytest
