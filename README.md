@@ -24,13 +24,19 @@ In that example I created my uv venv with the below, after making sure that I wa
 ls -1d /opt/python/*
 
 # Create the uv project, this example declares the python version to use explicitly. Make sure this matches a version you have access to.
-uv init --app --python 3.10.16
+uv init --app --python 3.12.11
 
+# Create a virtual environment 
+uv venv
+
+# Initialize the venv 
+source .venv/bin/activate
+
+# Install needed packages
 uv pip install shiny
 ```
 
-If using a specific version of a package make sure it is called out both in the python-versions file and the pyproject.toml file
-If using a specific version of databricks-connect then make sure that the version needed is called out in the pyproject.toml file like this:
+If using a specific version of a package make sure it is called out both in the python-versions file and the pyproject.toml file like this:
 
 ```
 dependencies = [
@@ -76,11 +82,37 @@ Leave a virtual environment with:
 deactivate
 ```
 
+## Run it 
+
+### The uv way
+
+Use [uv](https://github.com/astral-sh/uv). It will detect that this is a project and create the venv for us when we go to run the application. 
+
+Run the application:
+
+```bash
+uv run app.py
+```
+
+Stuck on the `loading...` screen? Try closing the session and re-running the above command. It seems like there can be a transient issue that happens when the environment setup and app run steps are run together. 
+
+### The pip way
+
+Run the application (after setting up the venv):
+
+```bash
+python app.py
+```
+
 ## Deploy
 
 ### rsconnect-python CLI
 
 ```bash
+# With uv
+uv run rsconnect deploy shiny .
+
+# Without uv
 rsconnect deploy shiny .
 ```
 
@@ -89,10 +121,14 @@ rsconnect deploy shiny .
 Update the code, and then run:
 
 ```bash
+# With uv
+uv export -o requirements.txt --no-hashes
+uv run rsconnect write-manifest shiny --overwrite .
+
+# Without uv
+pip freeze > requirements.txt 
 rsconnect write-manifest shiny --overwrite .
 ```
-
-Commit the new `manifest.json` file to the git repo along with the code.
 
 ## Testing 
 
