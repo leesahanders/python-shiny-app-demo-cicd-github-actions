@@ -9,7 +9,6 @@ jobs:
   test-and-connect-publish:
     runs-on: ubuntu-22.04
     outputs:
-      output1: results
       dir: ${{ steps.publish.outputs.dir }}
       url: ${{ steps.publish.outputs.url }}
       id: ${{ steps.publish.outputs.id }}
@@ -37,7 +36,7 @@ jobs:
         if: ${{ !cancelled() }}
         with:
           name: playwright-traces
-          path: test-results/
+          path: tests/
 
       - name: Create manifest.json
         run: |
@@ -53,6 +52,13 @@ jobs:
           force: true
           dir: |
             .:/python-shiny-app-demo-cicd-github-actions
+
+      - name: Check outputs
+        run: |
+          echo "$dir"
+          echo "$url"
+          echo "$id"
+          echo "$success"
 
       - name: Update meta data 
         run: |
