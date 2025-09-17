@@ -69,6 +69,8 @@ jobs:
 
           echo "Content GUID: $CONTENT_GUID"
 
+          echo  "${{ secrets.CONNECT_SERVER }}
+
           # Update the content metadata
           DATA='{"title": "Python CICD with pytest and Playwright using Github actions"}'
           curl --silent --show-error -L --max-redirs 0 --fail \
