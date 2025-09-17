@@ -269,6 +269,38 @@ scipy
 How to configure a pypi repository globally (using pip.conf): 
 <https://docs.posit.co/resources/install-python/#optional-configure-a-pypi-repository>
 
+## Getting the GUID 
+
+```
+          CONTENT_NAME="python-shiny-app-demo-cicd-github-actions"
+          API_KEY="T0BIFNvRyz9jCtiezw0QU4WMkP1KRTHk"
+          CONNECT_SERVER="https://pub.current.posit.team/"
+          echo ${{ secrets.CONNECT_SERVER }}/_api__/v1/content?name=${CONTENT_NAME}
+          # this works
+          curl --silent --show-error -L --max-redirs 0 --fail \
+            -X GET \
+            -H "Authorization: Key ${API_KEY}" \
+            "https://pub.current.posit.team/__api__/v1/content"
+          # this works
+          curl --silent --show-error -L --max-redirs 0 --fail \
+            -X GET \
+            -H "Authorization: Key ${API_KEY}" \
+            "${CONNECT_SERVER}__api__/v1/content"
+          # this works
+          curl --silent --show-error -L --max-redirs 0 --fail \
+            -X GET \
+            -H "Authorization: Key ${API_KEY}" \
+            "${CONNECT_SERVER}__api__/v1/content?name=${CONTENT_NAME}"
+          echo "Content GUID: $CONTENT_GUID"
+          echo  "${{ secrets.CONNECT_SERVER }}
+          DATA='{"title": "Python CICD with pytest and Playwright using Github actions"}'
+          curl --silent --show-error -L --max-redirs 0 --fail \
+            -X PATCH \
+            -H "Authorization: Key ${{ secrets.CONNECT_API_KEY }}" \
+            --data-raw "${DATA}" \
+            "${{ secrets.CONNECT_SERVER }}/__api__/v1/content/${CONTENT_GUID}"
+```
+
 ## Troubleshooting
 
 ### Issues with Python not being on path

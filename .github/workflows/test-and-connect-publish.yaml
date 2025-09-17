@@ -64,13 +64,10 @@ jobs:
       - name: Update meta data 
         run: |
           CONTENT_NAME='python-shiny-app-demo-cicd-github-actions'
-          echo ${{ secrets.CONNECT_SERVER }}/_api__/v1/content?name=${CONTENT_NAME}
-          curl --silent --show-error -L --max-redirs 0 --fail \
+          export CONTENT_GUID=$(curl --silent --show-error -L --max-redirs 0 --fail \
             -X GET \
             -H "Authorization: Key ${{ secrets.CONNECT_API_KEY }}" \
-            "${{ secrets.CONNECT_SERVER }}/__api__/v1/content?name==${CONTENT_NAME}"
-          echo "Content GUID: $CONTENT_GUID"
-          echo  "${{ secrets.CONNECT_SERVER }}
+            "${{ secrets.CONNECT_SERVER }}__api__/v1/content?name=${CONTENT_NAME}" | jq -r '.[].guid')
           DATA='{"title": "Python CICD with pytest and Playwright using Github actions"}'
           curl --silent --show-error -L --max-redirs 0 --fail \
             -X PATCH \
