@@ -67,7 +67,7 @@ jobs:
           export CONTENT_GUID=$(curl --silent --show-error -L --max-redirs 0 --fail \
             -X GET \
             -H "Authorization: Key ${{ secrets.CONNECT_API_KEY }}" \
-            "${{ secrets.CONNECT_SERVER }}__api__/v1/content?name=${CONTENT_NAME}" | jq -r '.[].guid')
+            "https://pub.current.posit.team/__api__/v1/content?name=${CONTENT_NAME}" | jq -r '.[].guid')
           DATA='{"title": "Python CICD with pytest and Playwright using Github actions"}'
           curl --silent --show-error -L --max-redirs 0 --fail \
             -X PATCH \
