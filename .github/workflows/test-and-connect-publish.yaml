@@ -64,8 +64,8 @@ jobs:
       - name: Update meta data 
         run: |
           CONTENT_NAME='python-shiny-app-demo-cicd-github-actions'
-          echo ${{ secrets.CONNECT_SERVER }}/__api__/v1/content?name=${CONTENT_NAME}
-          CONTENT_GUID=$(curl -H "Authorization: KEY ${{ secrets.CONNECT_API_KEY }}" ${{ secrets.CONNECT_SERVER }}/__api__/v1/content?name=${CONTENT_NAME} | jq -r '.[].guid')
+          echo ${{ secrets.CONNECT_SERVER }}/_api__/v1/content?name=${CONTENT_NAME}
+          CONTENT_GUID=$(curl -H "Authorization: KEY ${{ secrets.CONNECT_API_KEY }}" ${{ secrets.CONNECT_SERVER }}__api__/v1/content?name=${CONTENT_NAME} | jq -r '.[].guid')
           echo "Content GUID: $CONTENT_GUID"
           echo  "${{ secrets.CONNECT_SERVER }}
           DATA='{"title": "Python CICD with pytest and Playwright using Github actions"}'
@@ -73,7 +73,7 @@ jobs:
             -X PATCH \
             -H "Authorization: Key ${{ secrets.CONNECT_API_KEY }}" \
             --data-raw "${DATA}" \
-            "${{ secrets.CONNECT_SERVER }}/__api__/v1/content/${CONTENT_GUID}"
+            "${{ secrets.CONNECT_SERVER }}__api__/v1/content/${CONTENT_GUID}"
 
 
         # The output from publishing the app
